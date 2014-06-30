@@ -1,6 +1,6 @@
 <%= form_tag root_path, :method => :get do %> <!-- wraps inputs as a get form, and returns results to the root_path -->
   <%= text_field_tag :search %> <!-- small text box with the ID 'search' -->
-  <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users']], :selected => params[:filter]) ) %>
+  <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users'],['Playlists', '/playlists']], :selected => params[:filter]) ) %>
     <!-- select_tag creates the select tag, and accepts two arguments. It's first argument sets name & ID to 'filter', second argument is the options_for_select helper, which sets the <select> inputs options and it also has two arguments. The first argument is a nested array where each element has two elements: option text and option value. -->
   <%= submit_tag 'search!' %>
 <% end %>
@@ -20,7 +20,7 @@
             <% time = Time.at(time/1000).gmtime.strftime('%R:%S') %>
             <% time.gsub!(/^00:/, '') %>
             <% time.gsub!(/^0/, '') %>
-            <%= time %>
+            Duration: <%= time %>
           <% end %>
         </li>
 
@@ -31,6 +31,8 @@
         <% if t.genre.present?%>
           <li>Genre: <%= t.genre.titleize %></li>
         <% end %>
+
+        <li>Date added: <%= time_ago_in_words(t.created_at) %></li>
 
         <% if t.downloadable != false %>
           <li>Downloadable: <%= t.downloadable %></li>
@@ -60,6 +62,37 @@
         <li>Followers: <%= u.followers_count %></li>
 
         <li>Tracks: <%= u.track_count %></li>
+      </ul>
+    </ul>
+  <% end %>
+<% end %>
+
+<% if @playlists != nil && params[:search] != "" %>
+  <% @playlists.each do |p| %>
+    <ul>
+      <li><%= p.title %></li>
+      <ul>
+        <% if p.user["username"].present? %>
+          <li>Username: <%= p.user["username"].titleize %></li>
+        <% end %>
+
+        <li>
+          <% if p.duration.present? %>
+            <% time = p.duration %>
+            <% time = Time.at(time/1000).gmtime.strftime('%R:%S') %>
+            <% time.gsub!(/^00:/, '') %>
+            <% time.gsub!(/^0/, '') %>
+            Duration: <%= time %>
+          <% end %>
+        </li>
+
+        <li>Track count: <%= p.track_count %></li>
+
+        <li>Date added: <%= time_ago_in_words(p.created_at) %></li>
+
+        <% if p.genre.present?%>
+          <li>Genre: <%= p.genre.titleize %></li>
+        <% end %>
       </ul>
     </ul>
   <% end %>

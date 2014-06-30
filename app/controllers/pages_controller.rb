@@ -11,6 +11,8 @@ class PagesController < ApplicationController
     elsif params[:filter] == '/users' && params[:search]
       @users = client.get(params[:filter], :q => params[:search], :limit =>
         page_size)
+    elsif params[:filter] == '/playlists' && params[:search]
+      @playlists = client.get(params[:filter], :q => params[:search], :limit => page_size)
     else
       @tracks = []
       @users = []
