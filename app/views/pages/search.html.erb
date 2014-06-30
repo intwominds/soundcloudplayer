@@ -1,0 +1,66 @@
+<%= form_tag root_path, :method => :get do %> <!-- wraps inputs as a get form, and returns results to the root_path -->
+  <%= text_field_tag :search %> <!-- small text box with the ID 'search' -->
+  <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users']], :selected => params[:filter]) ) %>
+    <!-- select_tag creates the select tag, and accepts two arguments. It's first argument sets name & ID to 'filter', second argument is the options_for_select helper, which sets the <select> inputs options and it also has two arguments. The first argument is a nested array where each element has two elements: option text and option value. -->
+  <%= submit_tag 'search!' %>
+<% end %>
+
+<% if @tracks != nil && params[:search] != "" %>
+  <% @tracks.each do |t| %>
+    <ul>
+      <li><%= t.title %></li>
+      <ul>
+        <% if t.user["username"].present? %>
+          <li>Username: <%= t.user["username"] %></li>
+        <% end %>
+
+        <li>
+          <% if t.duration.present? %>
+            <% time = t.duration %>
+            <% time = Time.at(time/1000).gmtime.strftime('%R:%S') %>
+            <% time.gsub!(/^00:/, '') %>
+            <% time.gsub!(/^0/, '') %>
+            <%= time %>
+          <% end %>
+        </li>
+
+        <li>Playback count: <%= t.playback_count %></li>
+
+        <li>Favourites: <%= t.favoritings_count %></li>
+
+        <% if t.genre.present?%>
+          <li>Genre: <%= t.genre.titleize %></li>
+        <% end %>
+
+        <% if t.downloadable != false %>
+          <li>Downloadable: <%= t.downloadable %></li>
+        <% end %>
+      </ul>
+    </ul>
+  <% end %>
+<% end %>
+
+<% if @users != nil && params[:search] != "" %>
+  <% @users.each do |u| %>
+    <ul>
+      <li><%= u.username %></li>
+      <ul>
+        <% if u.full_name.present? %>
+          <li>Full name: <%= u.full_name.titleize %></li>
+        <% end %>
+
+        <% if u.city.present? %>
+          <li>City: <%= u.city.titleize %></li>
+        <% end %>
+
+        <% if u.country.present? %>
+          <li>Country: <%= u.country.titleize %></li>
+        <% end %>
+
+        <li>Followers: <%= u.followers_count %></li>
+
+        <li>Tracks: <%= u.track_count %></li>
+      </ul>
+    </ul>
+  <% end %>
+<% end %>

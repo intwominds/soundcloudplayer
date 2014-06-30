@@ -1,0 +1,24 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: soundcloudplayer_development
+  host: localhost
+  username: xaunlopez
+  password:
+
+test:
+  <<: *default
+  database: soundcloudplayer_test
+
+production:
+  <<: *default
+  database: soundcloudplayer_production
+  username: xaunlopez
+  password: <%= ENV['SOUNDCLOUDPLAYER_DATABASE_PASSWORD'] %>
+
+
