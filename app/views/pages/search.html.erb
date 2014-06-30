@@ -1,10 +1,28 @@
-<%= form_tag root_path, :method => :get do %> <!-- wraps inputs as a get form, and returns results to the root_path -->
-  <%= text_field_tag :search %> <!-- small text box with the ID 'search' -->
+<!-- wraps inputs as a 'get' form, and returns results to the root_path -->
+<%= form_tag root_path, :method => :get do %>
+  <!-- small text box with the ID 'search' -->
+  <%= text_field_tag :search %>
+  <!-- select input for tracks / users / playlists filtered search -->
   <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users'],['Playlists', '/playlists']], :selected => params[:filter]) ) %>
-    <!-- select_tag creates the select tag, and accepts two arguments. It's first argument sets name & ID to 'filter', second argument is the options_for_select helper, which sets the <select> inputs options and it also has two arguments. The first argument is a nested array where each element has two elements: option text and option value. -->
+
+  <!-- dynamically display tracks search sort_by options -->
+  <% if @tracks.present? && params[:search].present? %>
+    <div class="dynamic-button-1">
+      <%= select_tag(:sort_by_title, options_for_select([['Title (None)'], ['Title (Ascending)', 'ascending'], ['Title (Descending)', 'descending']]) ) %>
+      <%= select_tag(:sort_by_duration, options_for_select([['Duration (None)'], ['Duration (Ascending)', 'ascending'], ['Duration (Descending)', 'descending']]) ) %>
+      <%= select_tag(:sort_by_playback_count, options_for_select([['Plays (None)'], ['Plays (Ascending)', 'ascending'], ['Plays (Descending)', 'descending']]) ) %>
+      <%= select_tag(:sort_by_favoritings_count, options_for_select([['Likes (None)'], ['Likes (Ascending)', 'ascending'], ['Likes (Descending)', 'descending']]) ) %>
+      <%= select_tag(:sort_by_created_at, options_for_select([['Added (None)'], ['Added (Ascending)', 'ascending'], ['Added (Descending)', 'descending']]) ) %>
+      <%= select_tag(:sort_by_genre, options_for_select([['Genre (None)'], ['Genre (Ascending)', 'ascending'], ['Genre (Descending)', 'descending']]) ) %>
+      <%= select_tag(:sort_by_bpm, options_for_select([['BPM (None)'], ['BPM (Ascending)', 'ascending'], ['BPM (Descending)', 'descending']]) ) %>
+    </div>
+  <% end %>
+
   <%= submit_tag 'search!' %>
+
 <% end %>
 
+<!-- Search results sent from search function in pages controller -->
 <% if @tracks != nil && params[:search] != "" %>
   <% @tracks.each do |t| %>
     <ul>
