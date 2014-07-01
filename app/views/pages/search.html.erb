@@ -86,26 +86,31 @@
 
   <% if @users.present? %>
     <% @users.each do |u| %>
-      <ul>
-        <li><%= u.username %></li>
+      <div id="user">
         <ul>
-          <% if u.full_name.present? %>
-            <li>Full name: <%= u.full_name.titleize %></li>
-          <% end %>
+          <%= link_to(image_tag(u.avatar_url, size: "120x120", :class => 'user-avatar', :alt => "avatar", :title => "user-avatar"), "#") %>
+          <div id="user-objects">
+            <li><%= link_to(u.username, "#") %></li>
 
-          <% if u.city.present? %>
-            <li>City: <%= u.city.titleize %></li>
-          <% end %>
+            <% if u.full_name.present? %>
+              <li><%= u.full_name.titleize %></li>
+            <% end %>
 
-          <% if u.country.present? %>
-            <li>Country: <%= u.country.titleize %></li>
-          <% end %>
+            <% if u.city.present? && u.country.present? %>
+              <li><%= u.city.titleize%> / <%= u.country.titleize %></li>
+            <% else%>
+              <% if u.city.present? %>
+                <li><%= u.city.titleize %></li>
+              <% end %>
+              <% if u.country.present? %>
+                <li><%= u.country.titleize %></li>
+              <% end %>
+            <% end %>
 
-          <li>Followers: <%= u.followers_count %></li>
-
-          <li>Tracks: <%= u.track_count %></li>
+            <li class="users-followers-track"><img src="http://i.imgur.com/2nYngT3.png" class="followers-img"><%= u.followers_count %><img src="http://i.imgur.com/aTegYgV.png" class="trackcount-img"><%= u.track_count %></li>
+          </div>
         </ul>
-      </ul>
+      </div>
     <% end %>
   <% end %>
 

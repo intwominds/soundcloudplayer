@@ -107,6 +107,48 @@ td.icon img {
   display: none;
 }
 
+#user {
+  border-top: 1px solid #E0E0E0;
+}
+
+#user li {
+  list-style-type: none;
+  padding-bottom: 6px;
+}
+
+#user-objects {
+  display: inline-block;
+  padding-left: 25px;
+  vertical-align: top;
+  color: #868686;
+}
+
+.user-avatar {
+  display: inline-block;
+  border-radius: 20px;
+}
+
+#user li a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.users-followers-track {
+  font-size: 14px;
+}
+
+.followers-img {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.trackcount-img {
+  padding-left: 10px;
+  padding-right: 5px;
+  margin-top: 10px;
+}
+
 td {
   font-size: 1.2em;
 }
