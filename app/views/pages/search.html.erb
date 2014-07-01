@@ -1,63 +1,77 @@
 <!-- wraps inputs as a 'get' form, and returns results to the root_path -->
 <%= form_tag root_path, :method => :get do %>
   <!-- small text box with the ID 'search' -->
-  <%= text_field_tag :search %>
+  <%= text_field_tag :search, params[:search] %>
   <!-- select input for tracks / users / playlists filtered search -->
   <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users'],['Playlists', '/playlists']], :selected => params[:filter]) ) %>
 
-  <!-- dynamically display tracks search sort_by options -->
-  <% if @tracks.present? && params[:search].present? %>
-    <div class="dynamic-button-1">
-      <%= select_tag(:sort_by_title, options_for_select([['Title (None)'], ['Title (Ascending)', 'ascending'], ['Title (Descending)', 'descending']]) ) %>
-      <%= select_tag(:sort_by_duration, options_for_select([['Duration (None)'], ['Duration (Ascending)', 'ascending'], ['Duration (Descending)', 'descending']]) ) %>
-      <%= select_tag(:sort_by_playback_count, options_for_select([['Plays (None)'], ['Plays (Ascending)', 'ascending'], ['Plays (Descending)', 'descending']]) ) %>
-      <%= select_tag(:sort_by_favoritings_count, options_for_select([['Likes (None)'], ['Likes (Ascending)', 'ascending'], ['Likes (Descending)', 'descending']]) ) %>
-      <%= select_tag(:sort_by_created_at, options_for_select([['Added (None)'], ['Added (Ascending)', 'ascending'], ['Added (Descending)', 'descending']]) ) %>
-      <%= select_tag(:sort_by_genre, options_for_select([['Genre (None)'], ['Genre (Ascending)', 'ascending'], ['Genre (Descending)', 'descending']]) ) %>
-      <%= select_tag(:sort_by_bpm, options_for_select([['BPM (None)'], ['BPM (Ascending)', 'ascending'], ['BPM (Descending)', 'descending']]) ) %>
-    </div>
-  <% end %>
-
   <%= submit_tag 'search!' %>
-
 <% end %>
 
 <!-- Search results sent from search function in pages controller -->
 <% if @tracks != nil && params[:search] != "" %>
-  <% @tracks.each do |t| %>
-    <ul>
-      <li><%= t.title %></li>
-      <ul>
-        <% if t.user["username"].present? %>
-          <li>Username: <%= t.user["username"] %></li>
-        <% end %>
-
-        <li>
-          <% if t.duration.present? %>
-            <% time = t.duration %>
-            <% time = Time.at(time/1000).gmtime.strftime('%R:%S') %>
-            <% time.gsub!(/^00:/, '') %>
-            <% time.gsub!(/^0/, '') %>
-            Duration: <%= time %>
-          <% end %>
-        </li>
-
-        <li>Playback count: <%= t.playback_count %></li>
-
-        <li>Favourites: <%= t.favoritings_count %></li>
-
-        <% if t.genre.present?%>
-          <li>Genre: <%= t.genre.titleize %></li>
-        <% end %>
-
-        <li>Date added: <%= time_ago_in_words(t.created_at) %></li>
-
-        <% if t.downloadable != false %>
-          <li>Downloadable: <%= t.downloadable %></li>
-        <% end %>
-      </ul>
-    </ul>
-  <% end %>
+  <table id='player' class='tablesorter-default'>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Username</th>
+        <th>Duration</th>
+        <th>Plays</th>
+        <th>Likes</th>
+        <th>Genre</th>
+        <th>BPM</th>
+        <th>Added</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tracks.each do |t| %>
+        <tr>
+          <td>
+            <%= t.title %>
+          </td>
+          <td>
+            <% if t.user["username"].present? %>
+              <%= t.user["username"] %>
+            <% end %>
+          </td>
+          <td>
+            <% if t.duration.present? %>
+              <% time = t.duration %>
+              <% time = Time.at(time/1000).gmtime.strftime('%R:%S') %>
+              <% time.gsub!(/^00:/, '') %>
+              <% time.gsub!(/^0/, '') %>
+              <%= time %>
+            <% end %>
+          </td>
+          <td>
+            <%= t.playback_count %>
+          </td>
+          <td>
+            <%= t.favoritings_count %>
+          </td>
+          <td>
+            <% if t.genre.present?%>
+              <%= t.genre.titleize %>
+            <% end %>
+          </td>
+          <td>
+            <% if t.bpm.present? %>
+              <%= t.bpm %>
+            <% end %>
+          </td>
+          <td>
+            <%= time_ago_in_words(t.created_at).capitalize %>
+          </td>
+          <td>
+            <% if t.downloadable != false %>
+            <%= t.downloadable %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
 
 <% if @users != nil && params[:search] != "" %>

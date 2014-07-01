@@ -12,5 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery-tablesorter
 //= require_tree .
+
+$(document).ready(function()
+    {
+        $("#player").tablesorter();
+    }
+);
