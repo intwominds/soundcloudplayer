@@ -6,12 +6,12 @@ class PagesController < ApplicationController
     page_size = 50 #set page size limiting search results.
 
     # Determines which filter is selected and runs the search.
-    if params[:filter] == '/tracks' && params[:search]
+    if params[:filter] == '/tracks' && params[:search].present?
       @tracks = client.get(params[:filter], :q => params[:search], :limit => page_size)
-    elsif params[:filter] == '/users' && params[:search]
+    elsif params[:filter] == '/users' && params[:search].present?
       @users = client.get(params[:filter], :q => params[:search], :limit =>
         page_size)
-    elsif params[:filter] == '/playlists' && params[:search]
+    elsif params[:filter] == '/playlists' && params[:search].present?
       @playlists = client.get(params[:filter], :q => params[:search], :limit => page_size)
     else
       @tracks = []

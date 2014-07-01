@@ -2,6 +2,12 @@
  *= require jquery-tablesorter/theme.default
  *= require jquery-tablesorter/addons/pager/jquery.tablesorter.pager
  */
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
 body, html {
   height: 100%;
   margin: 0;
@@ -10,6 +16,7 @@ body, html {
 
 #container {
   min-height: 100%;
+  margin-bottom: 81px;
 }
 
 #yield {
@@ -31,11 +38,22 @@ body, html {
   margin-top: 0.5%;
 }
 
+#search-results {
+  margin-top: 20px;
+}
+
+#player_target {
+  position: fixed;
+  bottom: 0px;
+  width: 79%;
+}
+
 .search-bar {
   font-size: 1.2em;
-  width: 79%;
+  width: 78%;
   height: 30px;
   border-radius: 5px;
+  padding-left: 10px;
 }
 
 .search-filter {
@@ -61,3 +79,38 @@ body, html {
   -webkit-box-sizing: border-box;
 }
 
+.search-button,
+.search-bar,
+.search-filter {
+  background-color: white;
+}
+
+.now-playing td,
+.now-playing:hover td {
+  background-color: !important;
+}
+
+td.icon img {
+  display: none;
+}
+
+.now-playing td.icon img {
+  display: block;
+  /*padding-top: 50%;
+  padding-bottom: 50%;*/
+}
+
+.dl-img {
+}
+
+#dl-column-sort-fix {
+  display: none;
+}
+
+td {
+  font-size: 1.2em;
+}
+
+tr th {
+  font-size: 1.3em!important;
+}

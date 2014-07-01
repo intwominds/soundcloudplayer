@@ -6,128 +6,140 @@
     <!-- select input for tracks / users / playlists filtered search -->
     <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users'],['Playlists', '/playlists']], :selected => params[:filter]), { :class => 'search-filter'} ) %>
 
-    <%= submit_tag 'Search!', :class => 'search-button' %>
+    <%= submit_tag 'Search', :class => 'search-button' %>
   </div>
 <% end %>
 
-<!-- Search results sent from search function in pages controller -->
-<% if @tracks != nil && params[:search] != "" %>
-  <table id='player' class='tablesorter-default'>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Username</th>
-        <th>Duration</th>
-        <th>Plays</th>
-        <th>Likes</th>
-        <th>Genre</th>
-        <th>BPM</th>
-        <th>Added</th>
-        <th>Download</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @tracks.each do |t| %>
+<div id="search-results">
+  <!-- Search results sent from search function in pages controller -->
+  <% if @tracks.present? %>
+    <table id='player' class='tablesorter-default'>
+      <thead>
         <tr>
-          <td>
-            <%= t.title %>
-          </td>
-          <td>
-            <% if t.user["username"].present? %>
-              <%= t.user["username"] %>
-            <% end %>
-          </td>
-          <td>
-            <% if t.duration.present? %>
-              <% time = t.duration %>
+          <th></th>
+          <th>Title</th>
+          <th>Username</th>
+          <th>Duration</th>
+          <th>Plays</th>
+          <th>Likes</th>
+          <th>Genre</th>
+          <th>Bpm</th>
+          <th>Added</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tracks.each do |t| %>
+          <tr data-uri="<%= t.uri %>"> <!-- send uri data to JS, listens for click -->
+            <td class="icon"> <!-- img link for now playing icon -->
+              <img src="http://aweebitirish.com/wp-content/uploads/2014/04/soundcloud-play-button.png" alt="" width="20">
+            </td>
+            <td>
+              <%= t.title %>
+            </td>
+            <td>
+              <% if t.user["username"].present? %>
+                <%= t.user["username"] %>
+              <% end %>
+            </td>
+            <td>
+              <% if t.duration.present? %>
+                <% time = t.duration %>
+                <% time = Time.at(time/1000).gmtime.strftime('%R:%S') %>
+                <% time.gsub!(/^00:/, '') %>
+                <% time.gsub!(/^0/, '') %>
+                <%= time %>
+              <% end %>
+            </td>
+            <td>
+              <%= t.playback_count %>
+            </td>
+            <td>
+              <%= t.favoritings_count %>
+            </td>
+            <td>
+              <% if t.genre.present?%>
+                <%= t.genre.titleize %>
+              <% end %>
+            </td>
+            <td>
+              <% if t.bpm.present? %>
+                <%= t.bpm %>
+              <% end %>
+            </td>
+            <td>
+              <%= time_ago_in_words(t.created_at).capitalize %>
+            </td>
+            <td>
+              <% if t.downloadable != false %>
+                <div id="dl-column-sort-fix">
+                  <%= t.downloadable %>
+                </div>
+                <img src="http://i.imgur.com/UySvGq8.png" class="dl-img" alt="" width="20">
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <% if @users.present? %>
+    <% @users.each do |u| %>
+      <ul>
+        <li><%= u.username %></li>
+        <ul>
+          <% if u.full_name.present? %>
+            <li>Full name: <%= u.full_name.titleize %></li>
+          <% end %>
+
+          <% if u.city.present? %>
+            <li>City: <%= u.city.titleize %></li>
+          <% end %>
+
+          <% if u.country.present? %>
+            <li>Country: <%= u.country.titleize %></li>
+          <% end %>
+
+          <li>Followers: <%= u.followers_count %></li>
+
+          <li>Tracks: <%= u.track_count %></li>
+        </ul>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <% if @playlists.present? %>
+    <% @playlists.each do |p| %>
+      <ul>
+        <li><%= p.title %></li>
+        <ul>
+          <% if p.user["username"].present? %>
+            <li>Username: <%= p.user["username"].titleize %></li>
+          <% end %>
+
+          <li>
+            <% if p.duration.present? %>
+              <% time = p.duration %>
               <% time = Time.at(time/1000).gmtime.strftime('%R:%S') %>
               <% time.gsub!(/^00:/, '') %>
               <% time.gsub!(/^0/, '') %>
-              <%= time %>
+              Duration: <%= time %>
             <% end %>
-          </td>
-          <td>
-            <%= t.playback_count %>
-          </td>
-          <td>
-            <%= t.favoritings_count %>
-          </td>
-          <td>
-            <% if t.genre.present?%>
-              <%= t.genre.titleize %>
-            <% end %>
-          </td>
-          <td>
-            <% if t.bpm.present? %>
-              <%= t.bpm %>
-            <% end %>
-          </td>
-          <td>
-            <%= time_ago_in_words(t.created_at).capitalize %>
-          </td>
-          <td>
-            <% if t.downloadable != false %>
-            <%= t.downloadable %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+          </li>
 
-<% if @users != nil && params[:search] != "" %>
-  <% @users.each do |u| %>
-    <ul>
-      <li><%= u.username %></li>
-      <ul>
-        <% if u.full_name.present? %>
-          <li>Full name: <%= u.full_name.titleize %></li>
-        <% end %>
+          <li>Track count: <%= p.track_count %></li>
 
-        <% if u.city.present? %>
-          <li>City: <%= u.city.titleize %></li>
-        <% end %>
+          <li>Date added: <%= time_ago_in_words(p.created_at) %></li>
 
-        <% if u.country.present? %>
-          <li>Country: <%= u.country.titleize %></li>
-        <% end %>
-
-        <li>Followers: <%= u.followers_count %></li>
-
-        <li>Tracks: <%= u.track_count %></li>
-      </ul>
-    </ul>
-  <% end %>
-<% end %>
-
-<% if @playlists != nil && params[:search] != "" %>
-  <% @playlists.each do |p| %>
-    <ul>
-      <li><%= p.title %></li>
-      <ul>
-        <% if p.user["username"].present? %>
-          <li>Username: <%= p.user["username"].titleize %></li>
-        <% end %>
-
-        <li>
-          <% if p.duration.present? %>
-            <% time = p.duration %>
-            <% time = Time.at(time/1000).gmtime.strftime('%R:%S') %>
-            <% time.gsub!(/^00:/, '') %>
-            <% time.gsub!(/^0/, '') %>
-            Duration: <%= time %>
+          <% if p.genre.present?%>
+            <li>Genre: <%= p.genre.titleize %></li>
           <% end %>
-        </li>
-
-        <li>Track count: <%= p.track_count %></li>
-
-        <li>Date added: <%= time_ago_in_words(p.created_at) %></li>
-
-        <% if p.genre.present?%>
-          <li>Genre: <%= p.genre.titleize %></li>
-        <% end %>
+        </ul>
       </ul>
-    </ul>
+    <% end %>
   <% end %>
-<% end %>
+
+  <div id="player_target">
+  </div>
+</div>
