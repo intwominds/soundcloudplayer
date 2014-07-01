@@ -2,4 +2,62 @@
  *= require jquery-tablesorter/theme.default
  *= require jquery-tablesorter/addons/pager/jquery.tablesorter.pager
  */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  min-height: 100%;
+}
+
+#yield {
+  display: inline-block;
+  vertical-align: top;
+  width: 79%;
+  margin-left: 20.5%;
+}
+
+#side-panel {
+  display: inline-block;
+  background-color: grey;
+  width: 20%;
+  position: fixed;
+  height: 100%;
+}
+
+#top-bar {
+  margin-top: 0.5%;
+}
+
+.search-bar {
+  font-size: 1.2em;
+  width: 79%;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.search-filter {
+  font-size: 1.1em;
+  width: 110px;
+  border:1px solid #ccc;
+  vertical-align:top;
+  height: 36px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.search-button {
+  font-size: 1.2em;
+  width: 110px;
+  border:1px solid #ccc;
+  vertical-align:top;
+  height: 36px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
 
