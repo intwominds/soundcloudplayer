@@ -71,10 +71,11 @@ nav {
 .search-bar {
   font-size: 1.2em;
   width: 300px;
-  margin-left: 20%;
+  margin-left: 0%;
   height: 34px;
   border-radius: 3px;
   border: 1px solid black;
+  vertical-align: top;
 }
 
 .search-filter {
@@ -107,8 +108,13 @@ nav {
   background-color: white;
 }
 
+.home {
+  display: inline-block;
+  margin-left: 19.5%;
+  padding-right: 4px;
+}
+
 #auth-nav-options,
-#home,
 #sign-up,
 #sign-in,
 #log-out {

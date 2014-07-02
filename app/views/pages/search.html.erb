@@ -1,3 +1,14 @@
+<% unless params[:search].present? %>
+  <div id="index">
+    <h1>Cloudchaser</h1>
+    <p>Log in to create playlists.</p>
+    <div id='auth-nav-options'>
+      <%== smartnav %>
+    </div>
+    <p>or just search something..</p>
+  <div>
+<% end %>
+
 <div id="search-results">
   <!-- Search results sent from search function in pages controller -->
   <% if @tracks.present? %>
