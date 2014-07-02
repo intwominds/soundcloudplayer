@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get '/users/:id' => 'pages#user', :as => 'user'
   resources :accounts
 
+  get '/playlists/add/:id' => 'playlists#add'
+
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'

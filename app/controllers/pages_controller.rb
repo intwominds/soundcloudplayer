@@ -25,7 +25,7 @@ class PagesController < ApplicationController
     # Create a client object with your app credentials.
     client = Soundcloud.new(:client_id => 'ad246bea735d1371bb0416e34ec114a1')
     page_size = 50 #set page size limiting search results.
-
+    # queries server with a get request for user.id
     @user = client.get("/users/#{params[:id]}")
     @tracks = client.get("/users/#{params[:id]}/tracks")
   end

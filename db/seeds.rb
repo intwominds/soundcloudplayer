@@ -1,0 +1,3 @@
+Account.destroy_all
+Playlist.destroy_all
+Tracks.destroy_all

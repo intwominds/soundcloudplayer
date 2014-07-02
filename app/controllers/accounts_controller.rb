@@ -1,15 +1,24 @@
 class AccountsController < ApplicationController
   before_action :check_if_logged_in, :except => [:new, :create]
 
-  def new
-    @account = Account.new
+  def new # displays form and sends params to post accounts#create.
+    @account = Account.new # first argument cannot be empty unless an object, therefore @account is a temporary empty Account.new that does not get saved.
+
     # raise 'test'
   end
 
   def create
-    @account = Account.new user_params
+
+    @account = Account.new user_params # saves form input into Account.new table & @account variable.
     @account.username.downcase!
-    if @account.save
+
+    if @account.save # unless @account is not present, it will save to db..
+      # create a Playlist with the id of @account, and titles it 'Stash'.
+      @stash = Playlist.create(
+        :account_id => @account.id,
+        :title => 'Stash'
+      )
+      # raise 'test'
       redirect_to root_path
     else
       render :new
@@ -18,7 +27,11 @@ class AccountsController < ApplicationController
 
   private
   def user_params
-    params.require(:account).permit(:username, :password, :password_confirmation)
+    params.require(:account).permit(
+      :username,
+      :password,
+      :password_confirmation
+    )
   end
 
   def check_if_logged_in
