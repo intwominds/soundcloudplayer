@@ -74,10 +74,10 @@
 
   <% if @users.present? %>
     <% @users.each do |u| %>
-      <div id="user">
+      <div id="users">
         <ul>
-          <%= link_to(image_tag(u.avatar_url, size: "120x120", :class => 'user-avatar', :alt => "avatar", :title => "user-avatar"), "#") %>
-          <div id="user-objects">
+          <%= link_to(image_tag(u.avatar_url, size: "120x120", :class => 'user-avatar', :alt => "avatar", :title => "users-avatar"), "#") %>
+          <div id="users-objects">
             <li><%= link_to(u.username, "/users/#{u.id}") %></li>
 
             <% if u.full_name.present? %>

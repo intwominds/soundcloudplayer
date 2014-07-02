@@ -1,1 +1,94 @@
-Hello world
+<div id="user">
+<ul>
+  <%= image_tag(@user.avatar_url, size: "120x120", :class => 'user-avatar', :alt => "avatar", :title => "user-avatar") %>
+  <div id="user-objects">
+    <li><%= @user.username %></li>
+
+    <% if @user.full_name.present? %>
+      <li><%= @user.full_name.titleize %></li>
+    <% end %>
+
+    <% if @user.city.present? && @user.country.present? %>
+      <li><%= @user.city.titleize%> / <%= @user.country.titleize %></li>
+    <% else%>
+      <% if @user.city.present? %>
+        <li><%= @user.city.titleize %></li>
+      <% end %>
+      <% if @user.country.present? %>
+        <li><%= @user.country.titleize %></li>
+      <% end %>
+    <% end %>
+
+    <li class="user-followers-track"><img src="http://i.imgur.com/2nYngT3.png" class="followers-img"><%= @user.followers_count %><img src="http://i.imgur.com/aTegYgV.png" class="trackcount-img"><%= @user.track_count %></li>
+  </div>
+</ul>
+</div>
+
+<div id="user-tracks">
+  <table id='player' class='tablesorter-default'>
+    <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Duration</th>
+          <th>Plays</th>
+          <th>Likes</th>
+          <th>Genre</th>
+          <th>Bpm</th>
+          <th>Added</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tracks.each do |t| %>
+          <tr data-uri="<%= t.uri %>"> <!-- send uri data to JS, listens for click -->
+            <td class="icon"> <!-- img link for now playing icon -->
+              <img src="http://aweebitirish.com/wp-content/uploads/2014/04/soundcloud-play-button.png" alt="" width="20">
+            </td>
+            <td>
+              <%= t.title %>
+            </td>
+            <td>
+              <% if t.duration.present? %>
+                <% time = t.duration %>
+                <% time = Time.at(time/1000).gmtime.strftime('%R:%S') %>
+                <% time.gsub!(/^00:/, '') %>
+                <% time.gsub!(/^0/, '') %>
+                <%= time %>
+              <% end %>
+            </td>
+            <td>
+              <%= t.playback_count %>
+            </td>
+            <td>
+              <%= t.favoritings_count %>
+            </td>
+            <td>
+              <% if t.genre.present?%>
+                <%= t.genre.titleize %>
+              <% end %>
+            </td>
+            <td>
+              <% if t.bpm.present? %>
+                <%= t.bpm %>
+              <% end %>
+            </td>
+            <td>
+              <%= time_ago_in_words(t.created_at).capitalize %>
+            </td>
+            <td>
+              <% if t.downloadable != false %>
+                <div id="dl-column-sort-fix">
+                  <%= t.downloadable %>
+                </div>
+                <img src="http://i.imgur.com/UySvGq8.png" class="dl-img" alt="" width="20">
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+</div>
+
+<div id="player_target">
+</div>
