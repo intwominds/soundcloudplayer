@@ -78,7 +78,7 @@
         <ul>
           <%= link_to(image_tag(u.avatar_url, size: "120x120", :class => 'user-avatar', :alt => "avatar", :title => "user-avatar"), "#") %>
           <div id="user-objects">
-            <li><%= link_to(u.username, "#") %></li>
+            <li><%= link_to(u.username, "/users/#{u.id}") %></li>
 
             <% if u.full_name.present? %>
               <li><%= u.full_name.titleize %></li>

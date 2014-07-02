@@ -21,6 +21,9 @@ class PagesController < ApplicationController
   # raise 'test'
   end
 
+  def user
+  end
+
 end
 
 
