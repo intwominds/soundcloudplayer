@@ -8,21 +8,26 @@
 </head>
 <body>
   <div id="container">
-    <div id="side-panel">
-    </div>
+
     <nav>
       <!-- wraps inputs as a 'get' form, and returns results to the root_path -->
       <%= form_tag root_path, :method => :get do %>
         <div id="top-bar">
           <!-- small text box with the ID 'search' -->
-          <%= text_field_tag :search, params[:search], :placeholder => 'Search for sounds...', :class => 'search-bar' %>
+          <%= search_field_tag :search, params[:search], :placeholder => 'Search for sounds...', :class => 'search-bar', :autofocus => true %>
           <!-- select input for tracks / users / playlists filtered search -->
-          <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users'],['Playlists', '/playlists']], :selected => params[:filter]), { :class => 'search-filter'} ) %>
+          <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users']], :selected => params[:filter]), { :class => 'search-filter'} ) %>
 
           <%= submit_tag 'Search', :class => 'search-button' %>
         </div>
       <% end %>
     </nav>
+
+    <div id="side-panel-outer">
+      <div id="side-panel-inner">
+      </div>
+    </div>
+
     <div id="yield">
       <%= yield %>
     </div>

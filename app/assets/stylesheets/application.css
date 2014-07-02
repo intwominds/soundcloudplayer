@@ -14,6 +14,12 @@ body, html {
   padding: 0;
 }
 
+nav {
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+}
+
 #container {
   min-height: 100%;
   margin-bottom: 81px;
@@ -24,18 +30,31 @@ body, html {
   vertical-align: top;
   width: 79%;
   margin-left: 20.5%;
+  margin-top: 55px;
 }
 
-#side-panel {
+#top-bar {
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #262625;
+  padding: 10px;
+  border-bottom: 1px solid #EBE9E5;
+}
+
+/*#side-panel-outer {
+  background-color: #262625;
   display: inline-block;
   width: 20%;
   position: fixed;
   height: 100%;
-}
+}*/
 
-#top-bar {
-  margin-top: 0.5%;
-  margin-left: 20.5%;
+#side-panel-inner {
+  background-color: #CFCDC9;
+  position: fixed;
+  height: 100%;
+  width: 19.5%;
+  box-shadow: 1px 0px 3px #E0E0E0;
 }
 
 #search-results {
@@ -50,24 +69,26 @@ body, html {
 
 .search-bar {
   font-size: 1.2em;
-  width: 78%;
-  height: 30px;
-  border-radius: 5px;
-  padding-left: 10px;
+  width: 300px;
+  margin-left: 20%;
+  height: 34px;
+  border-radius: 3px;
+  border: 1px solid black;
 }
 
 .search-filter {
   font-size: 1.1em;
   width: 110px;
-  border:1px solid #ccc;
   vertical-align:top;
-  height: 36px;
+  height: 34px;
+  border: 1px solid black;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
 
 .search-button {
+  display: none;
   font-size: 1.2em;
   width: 110px;
   border:1px solid #ccc;
@@ -150,6 +171,15 @@ td.icon img {
   text-decoration: none;
 }
 
+#search-results td a {
+  color: black;
+  text-decoration: none;
+}
+
+#search-results td a:hover {
+  text-decoration: underline;
+}
+
 .users-followers-track,
 .user-followers-track {
   font-size: 14px;
@@ -169,6 +199,10 @@ td.icon img {
 td {
   font-size: 1.2em;
 }
+
+/*td:hover {
+  background-color: black;
+}*/
 
 tr th {
   font-size: 1.3em!important;
