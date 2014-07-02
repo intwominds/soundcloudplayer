@@ -108,15 +108,16 @@ nav {
 
 .now-playing td,
 .now-playing:hover td {
-  background-color: !important;
+  background-color: #E0E0E0!important;
 }
 
 td.icon img {
-  display: none;
+  padding-top: 1px;
 }
 
-.now-playing td.icon img {
-  display: block;
+.now-playing td {
+  background-color: #E0E0E0;
+  /*display: block;*/
   /*padding-top: 50%;
   padding-bottom: 50%;*/
 }
