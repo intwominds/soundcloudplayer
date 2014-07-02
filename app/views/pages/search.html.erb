@@ -1,11 +1,16 @@
 <% unless params[:search].present? %>
   <div id="index">
-    <h1>Cloudchaser</h1>
-    <p>Log in to create playlists.</p>
-    <div id='auth-nav-options'>
-      <%== smartnav %>
-    </div>
-    <p>or just search something..</p>
+    <% unless @current_account.present? %>
+      <h1>Cloudchaser</h1>
+      <p>Log in to create playlists.</p>
+      <div id='auth-nav-options'>
+        <%== smartindex %>
+      </div>
+      <p>or just search something..</p>
+    <% else %>
+      <h1>Cloudchaser</h1>
+      <p>Welcome back, <%= @current_account.username.capitalize %></p>
+    <% end %>
   <div>
 <% end %>
 

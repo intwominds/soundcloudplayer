@@ -19,6 +19,12 @@
           <!-- select input for tracks / users / playlists filtered search -->
           <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users']], :selected => params[:filter]), { :class => 'search-filter'} ) %>
 
+          <% if @current_account.present? %>
+            <div id='log-out'>
+            <%= link_to(image_tag('http://i.imgur.com/FAmpxyl.png', :width => '32x32'), login_path, :data => {:method => :delete, :confirm => 'Really logout?'}) %>
+            </div>
+          <% end %>
+
           <%= submit_tag 'Search', :class => 'search-button' %>
         </div>
       <% end %>
