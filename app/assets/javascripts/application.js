@@ -21,8 +21,12 @@ $(document).ready(function() {
   var player = '<object height="81" width="100%"><param name="movie" value="http://player.soundcloud.com/player.swf?show_artwork=false&show_comments=false&auto_play=true&url=XXX"></param><param name="allowscriptaccess" value="always"></param><embed src="http://player.soundcloud.com/player.swf?show_artwork=false&show_comments=false&auto_play=true&url=XXX" allowscriptaccess="always" height="81"  type="application/x-shockwave-flash" width="100%"></embed></object>';
 
   $('#player').on('click', 'tr', function (event) {
+    // Ignore clicks on <a> tags.
     if ($(event.target).is('a')) return true;
+
     var uri = $(this).data('uri');
+    if (! uri) return true;
+
     $('.now-playing').removeClass('now-playing'); // Remove the old Now Playing
     $(this).addClass('now-playing') // Add a new Now Playing
     var trackPlayer = player.replace('XXX', encodeURIComponent(uri));
