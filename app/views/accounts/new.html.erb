@@ -1,13 +1,4 @@
-<% if @user.error.any? %>
-  <h1>YOU MASSIVE IDIOT</h1>
-  <ul>
-    <% @users.error.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% form_for @users do |f| %>
+<%= form_for @account do |f| %>
   <%= f.label :username %>
   <%= f.text_field :username, :autofocus => true %>
 

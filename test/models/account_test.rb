@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: accounts
 #
 #  id              :integer          not null, primary key
 #  username        :string(255)
@@ -9,8 +9,10 @@
 #  updated_at      :datetime
 #
 
-class Users < ActiveRecord::Base
-  has_secure_password
-  has_many :playlists
-  validates :username, :presence => true, :length => { :minimum => 2}
+require 'test_helper'
+
+class AccountTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end
