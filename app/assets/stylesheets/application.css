@@ -50,11 +50,12 @@ nav {
 }*/
 
 #side-panel-inner {
-  background-color: #CFCDC9;
+  background-color: white;
   position: fixed;
   height: 100%;
   width: 19.5%;
-  box-shadow: 1px 0px 3px #E0E0E0;
+  border-right: 3px solid #E0E0E0;
+  /*box-shadow: 1px 0px 3px #E0E0E0;*/
 }
 
 #search-results {
@@ -104,6 +105,15 @@ nav {
 .search-bar,
 .search-filter {
   background-color: white;
+}
+
+#auth-nav-options,
+#home,
+#sign-up,
+#sign-in,
+#log-out {
+  display: inline-block;
+  padding-right: 10px;
 }
 
 .now-playing td,

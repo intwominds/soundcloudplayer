@@ -18,10 +18,21 @@
           <!-- select input for tracks / users / playlists filtered search -->
           <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users']], :selected => params[:filter]), { :class => 'search-filter'} ) %>
 
+          <div id='auth-nav-options'>
+            <div id="home"><%= link_to('home', '/') %></div>
+            <%== smartnav %>
+          </div>
+
           <%= submit_tag 'Search', :class => 'search-button' %>
         </div>
       <% end %>
     </nav>
+
+    <% if flash[:notice].present? %>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
 
     <div id="side-panel-outer">
       <div id="side-panel-inner">

@@ -21,7 +21,7 @@ class AccountsController < ApplicationController
     params.require(:account).permit(:username, :password, :password_confirmation)
   end
 
-  # def check_if_logged_in
-  #   redirect_to(new_account_path) if @current_account.nil?
-  # end
+  def check_if_logged_in
+    redirect_to(new_account_path) if @current_account.nil?
+  end
 end
