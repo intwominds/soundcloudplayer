@@ -96,7 +96,7 @@ nav {
   display: inline-block;
   vertical-align: top;
   width: 80%;
-  margin-left: 20.5%;
+  margin-left: 20%;
   margin-top: 55px;
 }
 
@@ -128,7 +128,7 @@ nav {
   margin-top: 60px;
   margin-left: 10px;
   height: 100%;
-  width: 19.7%;
+  width: 19%;
   border-right: 3.5px solid #E0E0E0;
   /*box-shadow: 1px 0px 3px #E0E0E0;*/
 }
@@ -353,6 +353,10 @@ span {
 #errors_accounts ul {
   margin-left: 30%;
   list-style-type: none;
+}
+
+#flash_error {
+  margin-left: 33.5%;
 }
 
 td {
