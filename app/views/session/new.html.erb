@@ -1,11 +1,20 @@
-<%= flash[:notice] %>
-
-<%= form_tag '/login' do %>
-  <%= label_tag 'username' %>
-  <%= text_field_tag 'username', nil, :autofocus => true %>
-
-  <%= label_tag 'password' %>
-  <%= password_field_tag 'password' %>
-
-  <%= submit_tag 'Login' %>
-<% end %>
+<div id="new_session_page">
+  <div id="new_session_container">
+    <div id="new_session_form">
+      <%= form_tag '/login' do %>
+        <p>
+        <%= text_field_tag 'username', nil, :placeholder => 'Username', :autofocus => true %>
+        </p>
+        <p>
+        <%= password_field_tag 'password' %>
+        </p>
+        <p>
+        <%= submit_tag 'Login' %>
+        </p>
+      <% end %>
+    </div>
+    <div id="flash_error">
+      <%= flash[:notice] %>
+    </div>
+  </div>
+</div>
