@@ -15,7 +15,7 @@
         <div id="top-bar">
           <%= link_to(image_tag('http://i.imgur.com/X4mopSW.png', :class => 'home', :width => '32x32'), '/') %>
           <!-- small text box with the ID 'search' -->
-          <%= search_field_tag :search, params[:search], :placeholder => 'Search for sounds...', :class => 'search-bar', :autofocus => true %>
+          <%= search_field_tag :search, params[:search], :placeholder => 'Search for sounds...', :class => 'search-bar', :autofocus =>  (params['controller'] == 'accounts' || params['controller'] == 'session') ? false : true %>
           <!-- select input for tracks / users / playlists filtered search -->
           <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users']], :selected => params[:filter]), { :class => 'search-filter'} ) %>
 

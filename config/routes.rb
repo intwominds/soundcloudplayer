@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get '/playlists/add/:id' => 'playlists#add'
   get '/playlists/:id' => 'playlists#show'
+  get '/playlists/remove/:id' => 'playlists#remove'
 
   get '/login' => 'session#new'
   post '/login' => 'session#create'

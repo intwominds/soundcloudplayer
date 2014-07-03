@@ -21,4 +21,12 @@ class PlaylistsController < ApplicationController
   render '/pages/search'
   end
 
+  def remove
+    # raise params.inspect
+    track = Track.find_by(:soundcloud_track_id => params[:id])
+    track.destroy
+    # raise 'test'
+    redirect_to (:back)
+  end
+
 end
