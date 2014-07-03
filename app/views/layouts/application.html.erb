@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cloudchaser</title>
+  <title>CloudChaser</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -40,7 +40,7 @@
 
     <div id="side-panel-outer">
       <div id="side-panel-inner">
-      <h3>Playlists</h3>
+        <h3>Playlists</h3>
         <% if @current_account.present?  %>
           <% @current_account.playlists.each do |playlist| %>
             <%= link_to(playlist.title, "/playlists/#{playlist.id}") %>

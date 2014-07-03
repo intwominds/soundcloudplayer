@@ -2,17 +2,18 @@
   <div id="index">
     <% unless @current_account.present? %>
       <div id='index-panel-noauth'>
-        <h1>Cloudchaser</h1>
+        <h1>CloudChaser</h1>
         <p id="p-log-in">Log in to create playlists.</p>
         <div id='auth-nav-options'>
           <%== smartindex %>
         </div>
         <p>or just search something..</p>
-        <p>&copy Xaun Lopez | wdi5</p>
+        <p id="cr">&copy Xaun Lopez | wdi5</p>
       </div>
     <% else %>
       <div id='index-panel-auth'>
-        <h1>Cloudchaser</h1>
+        <h1>CloudChaser</h1>
+        <p><em>"Music expresses that which cannot be put into words and that which cannot remain silent.”</em> - Victor Hugo</p><br><br><br>
         <p>Logged in as <%= @current_account.username.capitalize %></p>
       </div>
     <% end %>

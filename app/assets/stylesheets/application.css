@@ -3,6 +3,7 @@
  *= require jquery-tablesorter/addons/pager/jquery.tablesorter.pager
  */
 @import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
 
 * {
   font-family: 'Raleway', sans-serif;
@@ -16,6 +17,7 @@ body, html {
 
 body {
   /*margin-top: 80px;*/
+  overflow-x: hidden;
 }
 
 nav {
@@ -64,21 +66,23 @@ nav {
   top: 1px;
 }
 
-#index-panel-noauth {
+#index-panel-noauth,
+#index-panel-auth {
   text-align: center;
-  background-color: rgba(0,0,0,0.5);
-  padding-top: 1px;
-  padding-bottom: 10%;
+  background-color: rgba(0,0,0,0.4);
+  height: 400px;
   position: fixed;
   width: 79%;
   margin-left: 2.5px;
 }
 
-#index-panel-noauth p {
+#index-panel-noauth p,
+#index-panel-auth p {
   font-size: 1.2em;
 }
 
-#index-panel-noauth h1 {
+#index-panel-noauth h1,
+#index-panel-auth h1 {
   font-size: 3.5em;
 }
 
@@ -124,12 +128,25 @@ nav {
 #side-panel-inner {
   background-color: white;
   position: fixed;
-  margin-top: 70px;
-  margin-left: 5px;
+  margin-top: 60px;
+  margin-left: 10px;
   height: 100%;
   width: 19.7%;
-  border-right: 3px solid #E0E0E0;
+  border-right: 3.5px solid #E0E0E0;
   /*box-shadow: 1px 0px 3px #E0E0E0;*/
+}
+
+#side-panel-inner h3 {
+  margin: 5px;
+  padding: 3px 0px;
+  border-top: 1px solid #E0E0E0;
+}
+
+#side-panel-inner a {
+  display: block;
+  margin-left: 25px;
+  padding: 3px 0px;
+  border-top: 1px solid #E0E0E0;
 }
 
 #index {
@@ -288,8 +305,51 @@ td.icon img {
   margin-top: 10px;
 }
 
+label {
+  min-width: 172px;
+}
+
+input {
+  width: 250px;
+}
+
+#accounts_new_page {
+  background-image: url(http://i.imgur.com/yPsTKhp.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  border: 1px solid #E0E0E0;
+  box-shadow: 0px 5px 8px #E0E0E0;
+  padding-top: 5%;
+  padding-bottom: 100%;
+}
+
+#outer_form_accounts {
+  background-color: rgba(0,0,0,0.4);
+  width: 100%;
+  margin-top: 60px;
+  height: 400px;
+}
+
+#form_accounts {
+  display: inline-block;
+  text-align: right;
+  margin: auto;
+  margin-top: 100px;
+  width: 61%;
+}
+
 td {
   font-size: 1.2em;
+}
+
+#cr {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 /*td:hover {
@@ -299,3 +359,18 @@ td {
 tr th {
   font-size: 1.3em!important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
