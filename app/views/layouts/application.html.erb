@@ -12,20 +12,22 @@
     <nav>
       <!-- wraps inputs as a 'get' form, and returns results to the root_path -->
       <%= form_tag root_path, :method => :get do %>
-        <div id="top-bar">
-          <%= link_to(image_tag('http://i.imgur.com/X4mopSW.png', :class => 'home', :width => '32x32'), '/') %>
-          <!-- small text box with the ID 'search' -->
-          <%= search_field_tag :search, params[:search], :placeholder => 'Search for sounds...', :class => 'search-bar', :autofocus =>  (params['controller'] == 'accounts' || params['controller'] == 'session') ? false : true %>
-          <!-- select input for tracks / users / playlists filtered search -->
-          <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users']], :selected => params[:filter]), { :class => 'search-filter'} ) %>
+        <div id='top-bar-rim'>
+          <div id="top-bar">
+            <%= link_to(image_tag('http://i.imgur.com/X4mopSW.png', :class => 'home', :width => '32x32'), '/') %>
+            <!-- small text box with the ID 'search' -->
+            <%= search_field_tag :search, params[:search], :placeholder => 'Search for sounds...', :class => 'search-bar', :autofocus =>  (params['controller'] == 'accounts' || params['controller'] == 'session') ? false : true %>
+            <!-- select input for tracks / users / playlists filtered search -->
+            <%= select_tag(:filter, options_for_select([['Tracks', '/tracks'],['People', '/users']], :selected => params[:filter]), { :class => 'search-filter'} ) %>
 
-          <% if @current_account.present? %>
-            <div id='log-out'>
-            <%= link_to(image_tag('http://i.imgur.com/FAmpxyl.png', :width => '32x32'), login_path, :data => {:method => :delete, :confirm => 'Really logout?'}) %>
-            </div>
-          <% end %>
+            <% if @current_account.present? %>
+              <div id='log-out'>
+              <%= link_to(image_tag('http://i.imgur.com/FAmpxyl.png', :width => '32x32'), login_path, :data => {:method => :delete, :confirm => 'Really logout?'}) %>
+              </div>
+            <% end %>
 
-          <%= submit_tag 'Search', :class => 'search-button' %>
+            <%= submit_tag 'Search', :class => 'search-button' %>
+          </div>
         </div>
       <% end %>
     </nav>

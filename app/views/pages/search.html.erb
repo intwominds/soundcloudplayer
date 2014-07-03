@@ -1,15 +1,20 @@
 <% unless params[:search].present? || params[:controller] == "playlists" %>
   <div id="index">
     <% unless @current_account.present? %>
-      <h1>Cloudchaser</h1>
-      <p>Log in to create playlists.</p>
-      <div id='auth-nav-options'>
-        <%== smartindex %>
+      <div id='index-panel-noauth'>
+        <h1>Cloudchaser</h1>
+        <p id="p-log-in">Log in to create playlists.</p>
+        <div id='auth-nav-options'>
+          <%== smartindex %>
+        </div>
+        <p>or just search something..</p>
+        <p>&copy Xaun Lopez | wdi5</p>
       </div>
-      <p>or just search something..</p>
     <% else %>
-      <h1>Cloudchaser</h1>
-      <p>Logged in as <%= @current_account.username.capitalize %></p>
+      <div id='index-panel-auth'>
+        <h1>Cloudchaser</h1>
+        <p>Logged in as <%= @current_account.username.capitalize %></p>
+      </div>
     <% end %>
   <div>
 <% end %>
