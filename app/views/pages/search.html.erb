@@ -1,4 +1,4 @@
-<% unless params[:search].present? %>
+<% unless params[:search].present? || params[:controller] == "playlists" %>
   <div id="index">
     <% unless @current_account.present? %>
       <h1>Cloudchaser</h1>
@@ -9,7 +9,7 @@
       <p>or just search something..</p>
     <% else %>
       <h1>Cloudchaser</h1>
-      <p>Welcome back, <%= @current_account.username.capitalize %></p>
+      <p>Logged in as <%= @current_account.username.capitalize %></p>
     <% end %>
   <div>
 <% end %>
@@ -36,7 +36,12 @@
         <% @tracks.each do |t| %>
           <tr data-uri="<%= t.uri %>"> <!-- send uri data to JS, listens for click -->
             <td> <!-- img link for add to playlist icon -->
-              <%= link_to(image_tag("http://i.imgur.com/EUGqFBF.png", :width => "13x13", :class => 'icon'), "/playlists/add/#{t.id}") %>
+              <% if params[:controller] == 'playlists' %>
+                <%= link_to(image_tag("http://i.imgur.com/vlM1xzV.png", :width => "13x13", :class => 'icon'), "/playlists/remove/#{t.id}") %>
+
+              <% else %>
+                <%= link_to(image_tag("http://i.imgur.com/EUGqFBF.png", :width => "13x13", :class => 'icon'), "/playlists/add/#{t.id}") %>
+              <% end %>
             </td>
             <td>
               <%= t.title %>

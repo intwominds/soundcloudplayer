@@ -42,8 +42,8 @@
       <tbody>
         <% @tracks.each do |t| %>
           <tr data-uri="<%= t.uri %>"> <!-- send uri data to JS, listens for click -->
-            <td class="icon"> <!-- img link for now playing icon -->
-              <img src="http://i.imgur.com/EUGqFBF.png" alt="" width="13">
+            <td> <!-- img link for add to playlist icon -->
+              <%= link_to(image_tag("http://i.imgur.com/EUGqFBF.png", :width => "13x13", :class => 'icon'), "/playlists/add/#{t.id}") %>
             </td>
             <td>
               <%= t.title %>

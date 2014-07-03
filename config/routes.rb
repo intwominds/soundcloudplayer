@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :accounts
 
   get '/playlists/add/:id' => 'playlists#add'
+  get '/playlists/:id' => 'playlists#show'
 
   get '/login' => 'session#new'
   post '/login' => 'session#create'
@@ -23,6 +24,9 @@ end
 #              PATCH  /accounts/:id(.:format)      accounts#update
 #              PUT    /accounts/:id(.:format)      accounts#update
 #              DELETE /accounts/:id(.:format)      accounts#destroy
+
+#              GET    /playlists/add/:id(.:format) playlists#add
+#              GET    /playlists/:id(.:format)     playlist#show
 
 #        login GET    /login(.:format)             session#new
 #              POST   /login(.:format)             session#create

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   private
   def authenticate_user
-    if session[:account_id].present? # something is not nil, nor an empty string.
+    if session[:account_id].present? # session is not nil, nor an empty string.
       @current_account = Account.where(:id => session[:account_id]).first
     end
 

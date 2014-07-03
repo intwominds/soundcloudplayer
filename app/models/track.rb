@@ -9,6 +9,6 @@
 #  updated_at          :datetime
 #
 
-class Tracks < ActiveRecord::Base
+class Track < ActiveRecord::Base
   belongs_to :playlist
 end

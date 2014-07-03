@@ -18,6 +18,8 @@ class AccountsController < ApplicationController
         :account_id => @account.id,
         :title => 'Stash'
       )
+      session[:account_id] = @account.id
+
       # raise 'test'
       redirect_to root_path
     else
