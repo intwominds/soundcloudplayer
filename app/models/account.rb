@@ -7,6 +7,8 @@
 #  password_digest :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
+#  is_admin        :boolean          default(FALSE)
+#  email           :string(255)
 #
 
 class Account < ActiveRecord::Base

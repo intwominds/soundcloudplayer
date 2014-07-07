@@ -8,6 +8,9 @@
             <%= f.text_field :username, :placeholder => 'Username', :autofocus => true %>
           </p>
           <p>
+            <% text_field_tag 'email', :placeholder => 'Email' %>
+          </p>
+          <p>
             <%= f.password_field :password, :placeholder => 'Password' %>
           </p>
           <p>

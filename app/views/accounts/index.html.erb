@@ -1,0 +1,11 @@
+<div id="accounts_list">
+  <% @accounts.each do |a| %>
+    <ol>
+      <li><%= a.username %></li>
+      <ul>
+        <li><%= a.email %></li>
+        <li><%= a.created_at %></li>
+      </ul>
+    </ol>
+  <% end %>
+</div>

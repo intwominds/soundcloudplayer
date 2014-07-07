@@ -1,5 +1,10 @@
 class AccountsController < ApplicationController
   before_action :check_if_logged_in, :except => [:new, :create]
+  before_action :check_if_admin, :only => [:index]
+
+  def index
+    @accounts = Account.all
+  end
 
   def new # displays form and sends params to post accounts#create.
     @account = Account.new # first argument cannot be empty unless an object, therefore @account is a temporary empty Account.new that does not get saved.
@@ -31,6 +36,7 @@ class AccountsController < ApplicationController
   def user_params
     params.require(:account).permit(
       :username,
+      :email,
       :password,
       :password_confirmation
     )
@@ -38,5 +44,9 @@ class AccountsController < ApplicationController
 
   def check_if_logged_in
     redirect_to(new_account_path) if @current_account.nil?
+  end
+
+  def check_if_admin
+    redirect_to(root_path) unless @current_account.is_admin?
   end
 end
