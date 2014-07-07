@@ -15,7 +15,9 @@
         <h1>CloudChaser</h1>
         <p><em>"Music expresses that which cannot be put into words and that which cannot remain silent.”</em> - Victor Hugo</p><br><br><br>
         <p>Logged in as <%= @current_account.username.capitalize %></p>
-        <%= link_to('View Users', accounts_path) %>
+        <% if @current_account.try(:is_admin) %>
+          <%= link_to('View Users', accounts_path) %>
+        <% end %>
       </div>
     <% end %>
   <div>
