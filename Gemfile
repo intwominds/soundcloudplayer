@@ -32,6 +32,8 @@ gem 'soundcloud'
 
 gem 'jquery-tablesorter'
 
+gem 'dotenv-rails', :groups => [:development, :test]
+
 group :development do
   gem 'pry-rails'
   gem 'better_errors'
