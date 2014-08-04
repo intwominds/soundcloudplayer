@@ -1,8 +1,8 @@
 ## CloudChaser
-CloudChaser is a search, listen and playlist tool that uses the Soundcloud API to try and improve the raw search functionality. 
+CloudChaser is a search, listen and playlist tool that uses the Soundcloud API to try and improve the raw search functionality.
 My vision for this website was born from frustration using the official Soundcloud website when searching for new music. I wanted to make the search results faster, lightweight and using a traditional itunes/finder table sorting system.
 
-You can check it out here: cloudchaser.herokuapp.com
+You can check it out here: !(cloudchaser.herokuapp.com)
 
 ## Toolkit
 This website uses mainly Ruby on Rails, a touch of Javascript and the Soundcloud API.
